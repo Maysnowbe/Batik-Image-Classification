@@ -2,7 +2,7 @@
 Contributors: Gladys Lionardi, Phoebe Patricia Wibowo, Anastasia Jocelyn Hilman
 Programming Language: Python
 
-#Description
+# Description
 Batik merupakan salah satu warisan budaya Indonesia yang telah diakui oleh UNESCO secara internasional sejak 2 Oktober 2009. Batik merupakan sebuah gambar dengan kain sebagai mediumnya (Girsang & Muhathir, 2021). Dimana masing-masing motif memiliki nama tersendiri dan mengandung arti tertentu dari para leluhur (Muwafiq & Pamungkas, 2020).
 
 Selain bentuk dan pola, tekstur batik juga turut andil dalam menentukan motifnya, seperti pola ber-outline tebal dengan kontras tinggi, atau garis outline tipis dengan kontras rendah. Tebal-tipisnya outline pola beserta ukuran ornamen utama batik tersebut mempengaruhi motifnya (Girsang & Muhathir, 2021). Oleh karena itu, diperlukan sebuah metode untuk membantu dalam membedakan motif-motif batik yang ada.
@@ -11,7 +11,7 @@ Dalam proyek ini, digunakan algoritma Deep Learning, khususnya CNN (Convolutiona
 
 Data yang kami miliki terdiri dari 3 tipe batik, yaitu kawung, keraton, dan lasem, yang masing-masing terdiri atas 40-50 gambar. Dimana setiap gambar memiliki warna, ukuran, serta resolusi yang variatif. Selain itu, tidak semua gambar fokus kepada pola batik, melainkan ada yang berupa model mengenakan batik tersebut.
 
-#Data Preprocessing
+# Data Preprocessing
 Data diimport dan di-resize menjadi ukuran 260x260.
 Data yang dimiliki berjumlah total 145 gambar, yang dipecah menjadi 80% training, dan 20% test. Data tidak dipecah menjadi validation karena kurangnya jumlah data yang dimiliki.
 
@@ -23,8 +23,8 @@ Semua image kemudian di normalisasi agar proses modeling lebih stabil & lancar
 
 Karena dikitnya jumlah data, dilakukan augmentation untuk membiasakan model membaca berbagai macam jenis batik. Augmentasi dilakukan dengan mencoba merubah rotasi, height, dan width shift, shear, zoom, horizontal flip, dan fill untuk antisipasi pizel baru yang terbentuk setelah augmentasi. 
 
-#Modeling
-1. Transfer Learning
+# Modeling
+*Transfer Learning*
 Digunakan model EfficientNetB2 yang sudah di pretrained dengan data 'ImageNet'. Setelah model di load, ditambahkan Global Average Pooling, batch normalization, dan dropout 0.5.
 Pada output layer, digunakan activation function softmax.
 Loss function yang dioptimalkan adalah categorical cross entropy, karena model untuk multiclass classification.
@@ -32,7 +32,7 @@ Loss function yang dioptimalkan adalah categorical cross entropy, karena model u
 Compile menggunakan Adam Optimizer dengan learning rate 0,01
 Model kemudian di fit dengan epoch 30, batch size 5, dan early stopping serta checkpoint untuk menyimpan model dengan loss terkecil
 
-2. Architecture from scratch
+*Architecture from scratch*
 Ada 3 model yang dibuat dari dasar. Model pertama menggunakan separable convolution dengan regularizer L2 untuk mencegah overfit.
 Activation function 'ReLu' untuk convolution layernya, dan 'softmax' untuk output later, dengan jumlah parameter 3 juta. Kemudian, model di compile dan fit dengan hyperparameter yang sama dengan transfer learning.
 
@@ -42,7 +42,7 @@ Setelah evaluasi model pertama, model kedua dibangun dengan mengganti seperable 
 
 Setelah train & evaluasi, model ketiga dibangun dengan arsitektur yang sama seperti model kedua, namun tanpa regularizer.
 
-#Evaluation
+# Evaluation
 Berdasarkan accuracy adalah sebagai berikut: 
 1. EfficientNetB2: 0.2759
 2. Model 1: 0.3793
@@ -55,5 +55,5 @@ Berdasarkan loss adalah sebagai berikut:
 3. Model 2: 124670856
 4. Model 3: 21866950
 
-#Kesimpulan
+# Kesimpulan
 Dari keempat model, dapat dilihat bahwa accuracy masih buruk, yang menandakan semua model yang dibangun belum stabil dan cocok dengan data yang ada.
