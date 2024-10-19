@@ -1,5 +1,6 @@
 # Batik-Image-Classification
 Contributors: Gladys Lionardi, Phoebe Patricia Wibowo, Anastasia Jocelyn Hilman
+
 Programming Language: Python
 
 # Description
